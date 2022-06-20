@@ -1,0 +1,18 @@
+.pequeno{
+	font-size: 8px !important;
+}
+
+.abajo {
+
+   /* width:100%;
+   height:60px;   Height of the footer */
+   background:#d8cfc540;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+}
+
+.input-group-addon{
+	width: auto;
+}

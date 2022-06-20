@@ -1,0 +1,31 @@
+{
+  "name": "SEP401",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.6.1",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "firebase": "^9.8.2",
+    "jquery": "^3.6.0",
+    "morgan": "^1.9.1",
+    "node-fetch": "^2.0.0",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.5.0",
+    "tab-manager": "^1.0.11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "scripts": {
+    "start": "node src",
+    "dev": "nodemon src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
