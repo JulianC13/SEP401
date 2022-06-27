@@ -24,7 +24,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "dev": "nodemon index.js",
-    "build": "index.js index.js"
+    "build": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
