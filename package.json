@@ -23,8 +23,7 @@
   },
   "scripts": {
     "start": "node src",
-    "dev": "nodemon src",
-    "build": "node index.js"
+    "dev": "nodemon src"
   },
   "keywords": [],
   "author": "",
