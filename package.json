@@ -22,9 +22,9 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "start": "node src",
-    "dev": "nodemon src",
-    "build": "node index.js"
+    "start": "nodemon index.js",
+    "dev": "nodemon index.js",
+    "build": "index.js index.js"
   },
   "keywords": [],
   "author": "",
