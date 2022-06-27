@@ -23,13 +23,13 @@ var app = expess();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const port = process.env.PORT || 3000
-app.use('/css', expess.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('./css', expess.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/jquery', expess.static(__dirname + '/node_modules/jquery/dist/'));
 app.set('port', port);
-app.set('views',path.join(__dirname,'views'));
+app.set('views',path.join(__dirname,'./views'));
 app.set('view engine', 'ejs');
 //stactic files
-app.use(expess.static(path.join(__dirname,'public')));
+app.use(expess.static(path.join(__dirname,'./public')));
 //deploy
 app.listen(app.get('port'),() =>{
   console.log('Server on port', app.get('port'));
