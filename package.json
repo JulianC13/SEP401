@@ -23,7 +23,7 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "start": " npm install && node src",
+    "start": "node src",
     "dev": "nodemon src"
   },
   "keywords": [],
