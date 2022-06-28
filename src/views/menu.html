@@ -8,11 +8,11 @@
   <title><%= title %></title>
 
   <!-- Bootstrap -->
-  <% include partials/head.ejs %>
+  <% include partials/head.html%>
 </head>
 
 <body>
-  <% include partials/nav.ejs %>
+  <% include partials/nav.html %>
   <!-- HEADER -->
   <header>
     <div class="jumbotron">
@@ -52,18 +52,39 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab"> <p>Main course</p></div>
-        <div class="tab-pane fade" id="drinks" role="tabpanel" aria-labelledby="drinks-tab"> <p>drinks</p></div>
-        <div class="tab-pane fade" id="dessert" role="tabpanel" aria-labelledby="dessert-tab">  <p>cake</p></div>
+        <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
+           <p>Main course</p>
+           <div id="target-id"></div>
+           <p>cake</p>
+           <% nuevosCake.forEach(function(user){ %>
+            <li><%= user.key %>: <%= user.valor %> </li>
+           <% }) %>
+           </ul>
+           <p>Ice Cream</p>
+           <ul id="users">
+           <% nuevosIce.forEach(function(sabor){ %>
+             <li><%= sabor.key %>:<%= sabor.valor%> </li>
+           <% }) %>
+           
+        </div>
+        <div class="tab-pane fade" id="drinks" role="tabpanel" aria-labelledby="drinks-tab"> 
+         
+        </div>
+        <div class="tab-pane fade" id="dessert" role="tabpanel" aria-labelledby="dessert-tab"> 
+          <ul id="users">
+           
+            </ul> 
+          </div>
       </div>
     </div>
   </section>
   <!-- FOOTER -->
-  <% include partials/footer.ejs %>
+  <% include partials/footer.html %>
 
+  <script type="text/javascript" src="/js/consultar.js"></script>
   <script type="text/javascript" src="/js/menu.js"></script>
   <script>
-    var database = '<%= JSON.stringify(menu)%>';
+  
   </script>
 
 

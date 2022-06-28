@@ -14,7 +14,7 @@
     }
   },
   "hosting": {
-    "public": "views",
+    "public": "src/views",
     "ignore": [
       "firebase.json",
       "**/.*",
