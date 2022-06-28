@@ -7,6 +7,8 @@ var nuevosIce =[]
 
 
 dbref.child('items/desserts/cake/').on("value", function(snapshot) {
+
+  nuevosCake =[]
   snapshot.forEach(function(cakeSnapshot) {
     var key = cakeSnapshot.key;
     var valor = cakeSnapshot.val();
@@ -19,6 +21,7 @@ dbref.child('items/desserts/cake/').on("value", function(snapshot) {
 });
 
 dbref.child('items/desserts/icecream/').on("value", function(snapshot) {
+  nuevosIce =[]
   snapshot.forEach(function(iceSnapshot) {
     var key = iceSnapshot.key;
     var valor = iceSnapshot.val();
@@ -37,6 +40,7 @@ router.get('/', (req,res) =>{
 });
 router.get('/menu', (req,res) =>{
   // refresh();
+  
   res.render('menu',{ nuevosCake: nuevosCake,nuevosIce:nuevosIce,title:'Menu'});
 });
 
