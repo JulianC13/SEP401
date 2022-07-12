@@ -1,6 +1,4 @@
-
 const express = require('express')
-const fileURLToPath = require('url');
 var path = require('path');
 var app = module.exports = express();
 app.engine('.html', require('ejs').__express);
@@ -15,5 +13,3 @@ if (!module.parent) {
   app.listen(port);
   console.log('Express started on port 3000');
 }
-
-

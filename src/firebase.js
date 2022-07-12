@@ -1,4 +1,4 @@
-let firebase =require('firebase')
+let firebase =require('firebase');
 const firebaseConfig = {
     apiKey: "AIzaSyAJARgDKBZxQPTp5-f7aW1fOFXYwQ1CvfQ",
     authDomain: "sep401-c7014.firebaseapp.com",
@@ -12,8 +12,7 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   var dbref= firebase.database().ref();
   var listDes = []
-
-
-
+  
   module.exports = dbref;
+
   
