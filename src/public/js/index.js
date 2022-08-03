@@ -1,20 +1,14 @@
 // JavaScript Document
 
-
-  
-
   $('#loginForm').submit(function(e) {
     e.preventDefault();
     var data = $(this).serializeArray();
-    console.log("LOGIN");
-
-    console.log(data)
     let mailLog = data[0].value
     let passLog= data[1].value
     firebase.auth().signInWithEmailAndPassword(mailLog, passLog).then((userCredential) => {
       // Signed in
-      var user = userCredential.user;
-      // ...
+      obtenerInfoUserDb(userCredential.uid)
+      consultarAppointments(userCredential.uid)
       swal.fire({
         icon: 'success',
         title: 'PERFECT',
@@ -35,7 +29,7 @@
     });
   });
 
-
+  
   $('#signupForm').submit(function(e) {
     e.preventDefault();
     var data = $(this).serializeArray();
@@ -65,6 +59,7 @@
     var user = userCredential.user;
     createUserDB(data[0].value, data[1].value, data[2].value,data[3].value,data[4].value, userCredential.uid);
     location.href = '/menu';
+   
   })
   .catch((error) => {
     var errorCode = error.code;
@@ -81,8 +76,7 @@
   });
 
   var createUserDB = function (name, phone, address, docid, email, idU){
-  
-    firebase.database().ref('users/' + idU).set({
+    firebase.database().ref('Client/' + idU).set({
         username: email,
         name: name,
         phone: phone,
@@ -92,9 +86,33 @@
     
   }
 
-  var logout = function (){
-    firebase.auth().signOut();
-    location.href = '/';
+  var resetPassword= function(){
+    swal.fire({
+      input: 'text',
+      title: 'Password Recovery',
+      confirmButtonColor: '#00FF00',
+      confirmButtonText: 'Send mail',
+      focusConfirm: false,
+      preConfirm: (email) => {
+        if (!email) {
+          Swal.showValidationMessage(`Please enter email`)
+        }
+        return { email: email}
+      }
+    }).then((result) => {
+     firebase.auth().sendPasswordResetEmail(result.value.email)
+      .then(function() {  
+      // Email sent.
+      console.log("Envio bien")
+      })
+      .catch(function(error) {
+      // An error happened.
+       console.log("ERRRROR RECOVERY")
+       console.log("not correct format or user dont exist")
+      });
+    })
+    
   }
 
+ 
   

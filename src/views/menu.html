@@ -19,76 +19,39 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="text-center hola" id="hola">Select your option</h1>
+            <h1 class="text-center hola" id="helloText">Welcome back</h1>
           </div>
         </div>
       </div>
     </div>
   </header>
-  <!-- / HEADER -->
-
-  <!-- <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
-    <li class="nav-item active">
-      <a data-toggle="pill" href="#profile">MAIN</a>
-    </li>
-    <li class="nav-item disabled">
-      <a data-toggle="pill">DRINKS</a>
-    </li>
-    <li class="nav-item disabled">
-      <a data-toggle="pill">DESSERTS</a>
-    </li>
-  </ul> -->
   <section>
-    <div class="container ">
-      <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="main-tab" data-toggle="tab" href="#main" role="tab" aria-controls="main" aria-selected="true">MAIN</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="drinks-tab" data-toggle="tab" href="#drinks" role="tab" aria-controls="drinks" aria-selected="false">DRINKS</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="dessert-tab" data-toggle="tab" href="#dessert" role="tab" aria-controls="dessert" aria-selected="false">DESSERT</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
-           <p>Main course</p>
-           <div id="target-id"></div>
-           <p>cake</p>
-           <% nuevosCake.forEach(function(user){ %>
-            <li><%= user.key %>: <%= user.valor %> </li>
-           <% }) %>
-           </ul>
-           <p>Ice Cream</p>
-           <ul id="users">
-           <% nuevosIce.forEach(function(sabor){ %>
-             <li><%= sabor.key %>:<%= sabor.valor%> </li>
-           <% }) %>
-           
-        </div>
-        <div class="tab-pane fade" id="drinks" role="tabpanel" aria-labelledby="drinks-tab"> 
-         
-        </div>
-        <div class="tab-pane fade" id="dessert" role="tabpanel" aria-labelledby="dessert-tab"> 
-          <ul id="users">
-           
-            </ul> 
-          </div>
-      </div>
+    
+    <div class="container">
+      <table id="myTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Specialist</th>
+                <th>Status</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+      </table>
     </div>
+
+   
+    
   </section>
   <!-- FOOTER -->
   <% include partials/footer.html %>
-
-  <script type="text/javascript" src="/js/consultar.js"></script>
+  <!-- <script>
+    // stringify the data passed from router to ejs (within the EJS template only)
+    var parsed_data =appo;
+  </script> -->
   <script type="text/javascript" src="/js/menu.js"></script>
-  <script>
-  
-  </script>
-
-
-
 </body>
 
 </html>

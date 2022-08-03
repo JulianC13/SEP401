@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= title %></title>
+<input hidden id="idAppointment" value="<%= appoId %>">
+
+<!-- Bootstrap -->
+	<% include partials/head.html %>
+
+</head>
+<body>
+	<% include partials/nav.html %>
+	<div class="container">
+		<h2 id="AppDate"></h2>
+		<h2 id="Specialist"></h2>
+		<h2 id="Status"></h2>
+	</div>
+	
+<!-- HEADER -->
+
+
+<!-- FOOTER -->
+	<% include partials/footer.html %>
+<!-- / FOOTER -->
+<script type="text/javascript" src="/js/appointment.js"></script>
+</body>
+</html>

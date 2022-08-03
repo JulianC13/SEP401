@@ -13,6 +13,6 @@ const firebaseConfig = {
   var dbref= firebase.database().ref();
   var listDes = []
   
-  module.exports = dbref;
+  module.exports = {dbref,firebase};
 
   
