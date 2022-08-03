@@ -54,11 +54,23 @@
  
     let mail = data[4].value
     let passss= data[6].value
+    console.log(data)
     firebase.auth().createUserWithEmailAndPassword(mail, passss).then((userCredential) => {
     // Signed in 
     var user = userCredential.user;
     createUserDB(data[0].value, data[1].value, data[2].value,data[3].value,data[4].value, userCredential.uid);
-    location.href = '/menu';
+    obtenerInfoUserDb(userCredential.uid)
+    consultarAppointments(userCredential.uid)
+    swal.fire({
+      icon: 'success',
+      title: 'PERFECT',
+      confirmButtonColor: '#00FF00',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        location.href = '/menu';
+      }
+    })
+   
    
   })
   .catch((error) => {
@@ -75,7 +87,7 @@
     
   });
 
-  var createUserDB = function (name, phone, address, docid, email, idU){
+  var createUserDB = function (name, phone, docid,address, email, idU){
     firebase.database().ref('Client/' + idU).set({
         username: email,
         name: name,
