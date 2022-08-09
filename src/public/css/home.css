@@ -1,5 +1,5 @@
 .pequeno{
-	font-size: 8px !important;
+   font-size: 8px !important;
 }
 
 .abajo {
@@ -14,5 +14,30 @@
 }
 
 .input-group-addon{
-	width: auto;
+   width: auto;
 }
+
+.navbar ul li{ 
+   padding: 0px 10px; 
+ } 
+
+.bottomnavbar{
+   background-color: transparent;
+   color: black;
+   position: fixed;
+   bottom: 50px;
+   width: 100%;
+}
+
+.bottomnavbar ul li { 
+   padding: 0px 10px; 
+ } 
+
+.bottomnavbar a{
+   color: black;
+}
+
+.bottomnavbar a.active{
+   color: darkblue;
+}
+
