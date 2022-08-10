@@ -1,4 +1,3 @@
-const { process_params } = require("express/lib/router");
 
 // properties of the firebase connection
 const firebaseConfig = {
