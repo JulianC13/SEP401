@@ -8,7 +8,6 @@ $('#loginForm').submit(function(e) {
   firebase.auth().signInWithEmailAndPassword(mailLog, passLog).then((userCredential) => {
     // Signed in
     obtenerInfoUserDb(userCredential.uid)
-    consultarAppointments(userCredential.uid)
     swal.fire({
       icon: 'success',
       title: 'PERFECT',
@@ -53,7 +52,7 @@ $('#signupForm').submit(function(e) {
     })
     return
   }
-  var addresReq = /^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$/i;
+  var addresReq = /^(?:[0-9 ]+[a-z ]|[a-z ]+[0-9 ])[a-z0-9 ]*$/i;
   if(!data[3].value.match(addresReq)){
     swal.fire({
       icon: 'error',
@@ -101,52 +100,44 @@ $('#signupForm').submit(function(e) {
     })
     return
   }
-
-
   let mail = data[4].value
   let passss= data[6].value
-
   firebase.auth().createUserWithEmailAndPassword(mail, passss).then((userCredential) => {
-  // Signed in 
-  var user = userCredential.user;
-  createUserDB(data[0].value, data[1].value, data[2].value,data[3].value,data[4].value, userCredential.uid);
-  obtenerInfoUserDb(userCredential.uid)
-  consultarAppointments(userCredential.uid)
-  swal.fire({
-    icon: 'success',
-    title: 'PERFECT',
-    confirmButtonColor: '#00FF00',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      location.href = '/menu';
-    }
+    // Signed in 
+    var user = userCredential.user;
+    createUserDB(data[0].value, data[1].value, data[2].value,data[3].value,data[4].value, userCredential.uid);
+    obtenerInfoUserDb(userCredential.uid)
+    swal.fire({
+      icon: 'success',
+      title: 'PERFECT',
+      confirmButtonColor: '#00FF00',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        location.href = '/menu';
+      }
+    })  
   })
- 
- 
-})
-.catch((error) => {
-  var errorCode = error.code;
-  swal.fire({
-    icon: 'error',
-    title: 'ERROR',
-    text: error.message,
-    confirmButtonColor: '#FF0000',
-  })
-  var errorMessage = error.message;
-  // ..
-});
-  
+  .catch((error) => {
+    var errorCode = error.code;
+    swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: error.message,
+      confirmButtonColor: '#FF0000',
+    })
+    var errorMessage = error.message;
+    // ..
+  });
 });
 
 var createUserDB = function (name, phone, docid, address, email, idU){
   firebase.database().ref('Client/' + idU).set({
-      username: email,
-      name: name,
-      phone: phone,
-      address: address,
-      docid: docid
-    });
-  
+    username: email,
+    name: name,
+    phone: phone,
+    address: address,
+    docid: docid
+  });
 }
 
 var resetPassword= function(){

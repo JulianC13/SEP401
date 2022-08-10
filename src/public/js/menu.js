@@ -1,103 +1,138 @@
 // // JavaScript Document
 var general = []
-
-  
-
-
-$(document).ready(function(){
-  general = JSON.parse(sessionStorage.getItem("appointments"));
-  userrrr = JSON.parse(sessionStorage.getItem("userSession"));
-  console.log(general)
-  console.log(userrrr)
-  const myElement = document.getElementById("helloText");
-  myElement.innerHTML = 'Welcome back, '+ userrrr.name
-
-  
-
+uid = sessionStorage.getItem("uId");
+dbrefAppointmentTest.on("value", data => {
+  appointments = [];
+  data.forEach(function(appointment) {
+    var key = appointment.key;
+    var valor = appointment.val();
+      if(valor.client == uid ){
+      var actAppointment = new Appointment(key,valor.date,valor.status,valor.client,valor.specialist);
+      appointments.push(actAppointment);
+      }
+  });
+  $('#myTable').DataTable().destroy();
   $('#myTable').DataTable({
-    data: general,
+    data: appointments,
     columnDefs: [
-      {  targets: 4,
-         render: function (data, type, row, meta) {
-            return '<input type="button" class="name form-control" id=n-"' + meta.row + '" value="See"/>';
-         }
-
+      { "className": "dt-center", "targets": "_all"},
+      {  targets: 1,
+          render: function (data, type, row, meta) {
+            return '<a href="#detailsSection"><i class="detailsBut fa fa-search " id=n-"' +data+ '" ></i></a><a href="#editSection"><i type="button" class="pl-3 editBut fa fa-pencil" id=n-"' +data+ '"></i></a><i type="button" class="deleteBut colorBlue  pl-3 fa fa-trash " id=n-"' + data+ '" ></i>';
+          }
       }
     ],
     columns: [
-      { data: 'id' },
       { data: 'date' },
-      { data: 'specialistId',
-        render: function ( data, type, row ) {
-        return data;
-      }},
-      { data: 'status' }
-  ]
+      { data: 'id' }
+    ]
   });
-
-  $('#myTable tbody').on('click', '.name', function () {
+  $('#myTable tbody').on('click', '.detailsBut', function () {
+    console.log("HOLAAAA")
     var id = $(this).attr("Id").match(/\d+/)[0];
-
-    var data = $('#myTable').DataTable().row( id ).data();
-    console.log(id);
-    editAppointment(data.id)
-    console.log(data.id);
+    getDetails(id)
   });
-    
-    
-  $('#myTable tbody').on('click', '.salary', function () {
+
+  $('#myTable tbody').on('click', '.editBut', function () {
     var id = $(this).attr("id").match(/\d+/)[0];
-    var data = $('#myTable').DataTable().row( id ).data();
-    console.log(data[5]);
+    getEdit(id)
   });
-
-  editAppointment = function(dataId){
-    location.href = '/appointment/'+dataId;
-  }
-  // const bodyTable =document.getElementById("tablebody");
-  // body = '<tr>'
-  // body += "<td>"
-  // bodyTable.innerHTML = '<tr>'
-  // $(document).ready( function () {
-  //   var table = $('#example').DataTable({
-  //     columnDefs: [
-  //       {  targets: 1,
-  //          render: function (data, type, row, meta) {
-  //             return '<input type="button" class="name" id=n-"' + meta.row + '" value="Name"/><input type="button" class="salary" id=s-"' + meta.row + '" value="Salary"/>';
-  //          }
   
-  //       }
-  //     ]
-  //   });
-    
-  // $('#example tbody').on('click', '.name', function () {
-  //   var id = $(this).attr("id").match(/\d+/)[0];
-  //   var data = $('#example').DataTable().row( id ).data();
-  //   console.log(data[0]);
-  // });
-    
-    
-  // $('#example tbody').on('click', '.salary', function () {
-  //   var id = $(this).attr("id").match(/\d+/)[0];
-  //   var data = $('#example').DataTable().row( id ).data();
-  //   console.log(data[5]);
-  // });
-    
-  // } );
+  $('#myTable tbody').on('click', '.deleteBut', function () {
+    var id = $(this).attr("id").match(/\d+/)[0];
+    deleteAppointment(id)
+  });
+})
+ 
+$(document).ready(function(){
+  // general = JSON.parse(sessionStorage.getItem("appointments"));
+  userrrr = JSON.parse(sessionStorage.getItem("userSession"));
+  const myElement = document.getElementById("helloText");
+  myElement.innerHTML = 'Welcome back, '+ userrrr.name;
 
 
+  
 })
 
+async function getDetails(id){
+  let data = await obtenerInfoAppointmentDb(id)
 
+  let sectionDetails = document.getElementById('detailsSection')
+  let sectionEdit = document.getElementById('editSection')
 
+  let dateDe = document.getElementById('dateDetails')
+  let speDe = document.getElementById('specialistDetails')
+
+  sectionEdit.hidden = true;
+  sectionDetails.hidden = false;
+
+  dateDe.value = data.date
+  getInfoSpecialisDb().then((value) => {
+    value.forEach((element) => {
+      if(element.id == data.specialist)
+        speDe.value =  element.name+ " - "+element.treatement
+    });
+  });
+
+}
+
+async function getEdit(id){
+  let data = await obtenerInfoAppointmentDb(id)
+
+  let sectionEdit = document.getElementById('editSection')
+  let sectionDetails = document.getElementById('detailsSection')
+
+  let idApp = document.getElementById('idAppEd')
+  let prevDate = document.getElementById('dateEdit')
+  let selectDom = document.getElementById("specialistEdit");
+
+  sectionDetails.hidden = true;
+  sectionEdit.hidden = false;
+
+  prevDate.value = data.date
+  idApp.value = id
+
+  getInfoSpecialisDb().then((value) => {
+    value.forEach((element) => {
+      var opt = document.createElement("option");
+      opt.value= element.id;
+      opt.innerHTML = element.name+ " - "+element.treatement;
+      selectDom.appendChild(opt);
+    });
+    selectDom.value = data.specialist
+  });
+
+  
+}
+
+function deleteAppointment(id){
+  Swal.fire({
+    title: 'Are you sure to delete this Appointment ?',
+    showCancelButton: true,
+    confirmButtonText: 'Delete',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteAppointmentDB(id)
+      Swal.fire('Appointment Deleted !')
+    } 
+  })
+}
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
-    this.userId = user.uid
-    console.log("usuariooooo js loggeadoooo")
+    // console.log("usuariooooo js loggeadoooo")
   } else {
     // No user is signed in.
     logout();
   }
 });
+
+$('#editForm').submit(function(e) {
+  e.preventDefault();
+  var data = $(this).serializeArray();
+  console.log(data)
+  updateAppointmentDB(data[0].value,data[1].value,data[2].value)
+  Swal.fire('Appointment Edited!')
+});
+

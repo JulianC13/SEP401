@@ -26,26 +26,57 @@
     </div>
   </header>
   <section>
-    
     <div class="container">
       <table id="myTable">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Date</th>
-                <th>Specialist</th>
-                <th>Status</th>
                 <th>Actions</th>
-
             </tr>
         </thead>
       </table>
     </div>
+  </section>
 
-   
-    
+
+
+  
+  <section id="editSection" class="pt-5" hidden>
+    <div class="container">
+      <hr>
+      <h1>Edit Appointment </h1>
+      <form id="editForm" class="pt-4">
+        <div class="row">
+          <input name="idAppEd" id='idAppEd' type="text" hidden />
+          <div class="col-4"> <input name="dateEd"  class="form-control" type="date" id="dateEdit" /></div>
+          <div class="col-4"></div>
+          <div class="col-4"><select name="specialistEd" id="specialistEdit"  class="form-control">
+          </select></div>
+        </div>
+        <div class="row pt-4">
+          <div class="col-4"> </div>
+          <div class="col-4"> <input class="form-control" type='submit' value="Edit"/></div>
+          <div class="col-4"></div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <section id="detailsSection"  class="pt-5" hidden >
+    <div class="container">
+      <hr>
+      <h1>Appointment details</h1>
+      <div class="row pt-4">
+        <input name="idAppEd" id='idAppEd' type="text" hidden />
+        <div class="col-4"> <input class="form-control" type="date" id="dateDetails" disabled /></div>
+        <div class="col-4"></div>
+        <div class="col-4"><input id="specialistDetails"  class="form-control" disabled/></div>
+      </div>
+    </div>
   </section>
   <!-- FOOTER -->
+  <br>
+  <br>
+  <br>
   <% include partials/footer.html %>
   <!-- <script>
     // stringify the data passed from router to ejs (within the EJS template only)

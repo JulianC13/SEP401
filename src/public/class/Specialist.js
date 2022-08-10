@@ -1,8 +1,9 @@
 class Specialist{
-  constructor(id,name,speciality,phone,availability){
+  constructor(id,name,speciality,treatement,phone,availability){
     this.id = id;
     this.name = name;
     this.speciality =speciality;
+    this.treatement =treatement;
     this.phone = phone;
     this.availability =availability
   }

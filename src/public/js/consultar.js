@@ -10,6 +10,7 @@ const firebaseConfig = {
   };
   firebase.initializeApp(firebaseConfig);
   var dbrefAppointment= firebase.database().ref().child('Appointment');
+  var dbrefAppointmentTest= firebase.database().ref('/Appointment');
   var dbrefClient= firebase.database().ref().child('Client');
   var dbref= firebase.database().ref();
   var dbrefSpecialist= firebase.database().ref().child('Specialist');
@@ -17,57 +18,73 @@ const firebaseConfig = {
   var appointments =[]
   let usuarioEnSesionId = null
      
-  // dbrefice.on("child_added", function(snapshot) {
-  //   // var key = Object.keys(snapshot.val());
-  //   var key = snapshot.key;
-  //   var valor = snapshot.val();
-  //   ice.push({key,valor})
-  //   // console.log(ice)  
-  // }, function (errorObject) {
-  //  console.log("The read failed: " + errorObject.code);
-  // });
   var obtenerInfoUserDb =  function(idUser){
     dbref.child('Client/'+idUser).on('value', (snapshot) => {
       const data = snapshot.val();
       sessionStorage.setItem("userSession",JSON.stringify(data))
+      sessionStorage.setItem("uId",idUser)
     });
   }
-
   function obtenerInfoAppointmentDb (idAppoint){
-    console.log("PATH")
-    console.log(idAppoint)
     return new Promise(resolve => {
       dbref.child('Appointment/'+idAppoint).on('value', (snapshot) => {
         const data = snapshot.val();
         resolve(data)
       });
-      
     });
-    
   }
-
-  var consultarAppointments= function(uid){
-    appointments =[]
-    dbrefAppointment.on("value", function(snapshot) {
-      snapshot.forEach(function(appointment) {
-        var key = appointment.key;
-        var valor = appointment.val();
-        console.log(valor)
-        if(valor.client == uid){
-          var actAppointment = new Appointment(key,valor.date,valor.status,valor.client,valor.specialist);
-          appointments.push(actAppointment)
-        }
-        });
-        console.log(appointments)
-        sessionStorage.setItem("appointments",JSON.stringify(appointments))
+  function deleteAppointmentDB(idAppoint){
+    console.log(idAppoint)
+      dbref.child('Appointment/'+idAppoint).remove().then(function() {
+        console.log("Remove succeeded.")
+      })
+      .catch(function(error) {
+        console.log("Remove failed: " + error.message)
+      });
+  }
+  // // var consultarAppointments= function(uid){
+  //   // appointments =[]
+  //   dbrefAppointment.on("value", function(snapshot) {
+  //     snapshot.forEach(function(appointment) {
+  //       var key = appointment.key;
+  //       var valor = appointment.val();
+  //       // console.log(valor)
+  //       if(valor.client == uid){
+  //         var actAppointment = new Appointment(key,valor.date,valor.status,valor.client,valor.specialist);
+  //         appointments.push(actAppointment)
+  //       }
+  //       });
+  //       console.log(appointments)
+  //       sessionStorage.setItem("appointments",JSON.stringify(appointments))
        
   
-    }, function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
-    })
+  //   }, function (errorObject) {
+  //     console.log("The read failed: " + errorObject.code);
+  //   })
     
-    return appointments;
-  }
+  //   // return appointments;
+  // // }
+
+
+  // var consultarAppointmentsTest= function(uid){
+  //   appointments =[]
+  //   dbrefAppointment.on("value", function(snapshot) {
+  //     snapshot.forEach(function(appointment) {
+  //       var key = appointment.key;
+  //       var valor = appointment.val();
+  //       console.log(valor)
+  //       if(valor.client == uid){
+  //         var actAppointment = new Appointment(key,valor.date,valor.status,valor.client,valor.specialist);
+  //         appointments.push(actAppointment)
+  //       }
+  //       });
+  //       console.log(appointments)
+  //   }, function (errorObject) {
+  //     console.log("The read failed: " + errorObject.code);
+  //   })
+    
+  //   return appointments;
+  // }
   var consultarice= function(){
     return ice;
   }
@@ -83,3 +100,25 @@ const firebaseConfig = {
     location.href = '/';
    
   }
+
+  var getInfoSpecialisDb = function(){
+    specialists =[]
+    return new Promise(resolve => {
+      dbref.child('Specialist').on("value", function(snapshot) {
+        snapshot.forEach(function(specialist) {
+          var key = specialist.key;
+          var valor = specialist.val();
+            var spe = new Specialist(key,valor.name,valor.Services,valor.treatment,0421234234,valor.Services);
+            specialists.push(spe)
+          });
+          resolve(specialists)
+    });
+  });
+}
+
+var updateAppointmentDB = function (id, date, specialist){
+  firebase.database().ref('Appointment/' + id).update({
+      date: date,
+      specialist: specialist,
+    });
+}
