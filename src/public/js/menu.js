@@ -1,7 +1,9 @@
 // // JavaScript Document
 var general = []
 uid = sessionStorage.getItem("uId");
-dbrefAppointmentTest.on("value", data => {
+
+// Method that loads in realtime the list of appointments asosicated to an user
+dbrefAppointment.on("value", data => {
   appointments = [];
   data.forEach(function(appointment) {
     var key = appointment.key;
@@ -43,17 +45,17 @@ dbrefAppointmentTest.on("value", data => {
     deleteAppointment(id)
   });
 })
- 
+
+//section that loads when the document is ready and render the information of the user in the html
 $(document).ready(function(){
-  // general = JSON.parse(sessionStorage.getItem("appointments"));
   userrrr = JSON.parse(sessionStorage.getItem("userSession"));
   const myElement = document.getElementById("helloText");
   myElement.innerHTML = 'Welcome back, '+ userrrr.name;
-
-
-  
 })
 
+// Method that allows to get the details of determinated appointment and show them in the html
+// params
+// id: String -> id of the appointment that is going to be consulted
 async function getDetails(id){
   let data = await obtenerInfoAppointmentDb(id)
 
@@ -76,6 +78,9 @@ async function getDetails(id){
 
 }
 
+// Method that allows to get the details of determinated appointment and show allows the edition of the inputs in the html
+// params
+// id: String -> id of the appointment that is going to be edited
 async function getEdit(id){
   let data = await obtenerInfoAppointmentDb(id)
 
@@ -105,6 +110,9 @@ async function getEdit(id){
   
 }
 
+// Method that allows to delete determinated appointment
+// params
+// id: String -> id of the appointment that is going to be deleted
 function deleteAppointment(id){
   Swal.fire({
     title: 'Are you sure to delete this Appointment ?',
@@ -118,6 +126,7 @@ function deleteAppointment(id){
   })
 }
 
+// Method that check that there is a user sesion active
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
@@ -128,6 +137,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+// Method that handle the submit event of the edit appointment form
 $('#editForm').submit(function(e) {
   e.preventDefault();
   var data = $(this).serializeArray();

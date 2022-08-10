@@ -1,3 +1,5 @@
+// Class that model the entity of the Client 
+
 class Client{
   constructor(id,name,email,address,phone,username){
     this.id = id;

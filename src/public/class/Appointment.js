@@ -1,3 +1,4 @@
+// Class that model the entity of the appointment 
 class Appointment{
   constructor(id,date,status,userId,specialistId){
     this.id = id;

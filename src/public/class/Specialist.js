@@ -1,3 +1,4 @@
+// Class that model the entity of the Specialist 
 class Specialist{
   constructor(id,name,speciality,treatement,phone,availability){
     this.id = id;
