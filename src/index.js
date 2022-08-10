@@ -1,10 +1,12 @@
 const express = require('express')
 var path = require('path');
+
 var app = module.exports = express();
 app.engine('.html', require('ejs').__express);
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'html');
+// Setting the port for the application 
 const port = process.env.PORT || 3000
 //routes
 app.use(require('./routes/index'));
