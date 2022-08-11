@@ -8,5 +8,6 @@ const {appointmentView } = require('../controllers/appointmentController');
 router.get('/menu', menuView);
 router.get('/', loginView);
 router.get('/appointment/:appointmentId', appointmentView);
+router.get('/appointment', appointmentView);
 
 module.exports = router;

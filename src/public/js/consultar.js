@@ -96,10 +96,18 @@ var getInfoSpecialisDb = function(){
 // id: String -> id of the appointment that is going to be updated 
 // date: String -> the new date of the appointment
 // specialist: String-> the id of the new specialist that is going to be assigned to the appointment
-
 var updateAppointmentDB = function (id, date, specialist){
   firebase.database().ref('Appointment/' + id).update({
       date: date,
       specialist: specialist,
     });
+}
+
+var getInfoSpecialistDb = function(){
+  return new Promise(resolve => {
+    dbref.child('Specialist/').on('value', (snapshot) => {
+      const data = snapshot.val();
+      resolve(data)
+    });
+  });
 }
