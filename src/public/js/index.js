@@ -155,6 +155,7 @@ var resetPassword= function(){
     input: 'text',
     title: 'Password Recovery',
     confirmButtonColor: '#00FF00',
+    inputPlaceholder: 'Enter your  email',
     confirmButtonText: 'Send mail',
     focusConfirm: false,
     preConfirm: (email) => {

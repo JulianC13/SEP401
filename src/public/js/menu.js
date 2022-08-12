@@ -50,7 +50,7 @@ dbrefAppointment.on("value", data => {
 $(document).ready(function(){
   userrrr = JSON.parse(sessionStorage.getItem("userSession"));
   const myElement = document.getElementById("helloText");
-  myElement.innerHTML = 'Welcome back, '+ userrrr.name;
+  myElement.innerHTML =  userrrr.name;
 })
 
 // Method that allows to get the details of determinated appointment and show them in the html

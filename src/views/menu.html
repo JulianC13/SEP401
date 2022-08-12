@@ -15,26 +15,38 @@
   <% include partials/nav.html %>
   <!-- HEADER -->
   <header>
-    <div class="jumbotron">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <h1 class="text-center hola" id="helloText">Welcome back</h1>
-          </div>
-        </div>
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 fw-normal">Welcome back,</h1>
+        <p class="lead fw-normal hola display-4" id="helloText"></p>
+        <!-- <a class="btn btn-outline-secondary" href="#">Coming soon</a> -->
       </div>
+      <div class="product-device shadow-sm d-none d-md-block"></div>
+      <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
     </div>
   </header>
   <section>
-    <div class="container">
-      <table id="myTable">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-      </table>
+    <div class="container pt-4">
+      <div class="row">
+        <div class="col-7">
+           <h1 class="text-left pb-4 display-4" >Active Appointments</h1>
+           <table id="myTable" >
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+          </table>
+        </div>
+        <di class="col-1"></di>
+        <div class="col-4 centerDiv "style="text-align: center;">
+          <button class="form-control roundBtn"> + </button>
+          <label class="text-center pt-4 display-5">Create New Appointment</label>
+        </div>
+      </div>
+     
+      
     </div>
   </section>
 
@@ -44,10 +56,10 @@
   <section id="editSection" class="pt-5" hidden>
     <div class="container">
       <hr>
-      <h1>Edit Appointment </h1>
+      <h1 class=" display-4">Edit Appointment </h1>
       <form id="editForm" class="pt-4">
         <div class="row">
-          <input name="idAppEd" id='idAppEd' type="text" hidden />
+          <input name="idAppEd" id='idAppEd' type="text" hidden/>
           <div class="col-4"> <input name="dateEd"  class="form-control" type="date" id="dateEdit" /></div>
           <div class="col-4"></div>
           <div class="col-4"><select name="specialistEd" id="specialistEdit"  class="form-control">
@@ -64,7 +76,7 @@
   <section id="detailsSection"  class="pt-5" hidden >
     <div class="container">
       <hr>
-      <h1>Appointment details</h1>
+      <h1 class=" display-4">Appointment details</h1>
       <div class="row pt-4">
         <input name="idAppEd" id='idAppEd' type="text" hidden />
         <div class="col-4"> <input class="form-control" type="date" id="dateDetails" disabled /></div>
