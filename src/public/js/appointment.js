@@ -2,13 +2,31 @@ var general = []
 uid = sessionStorage.getItem("uId");
 specialistSelected = -1;
 
+specialistsCards()
+
+//section that loads when the document is ready and render the information of the user in the html
 $(document).ready(function(){
   userrrr = JSON.parse(sessionStorage.getItem("userSession"));
   const myElement = document.getElementById("helloText");
   myElement.innerHTML = 'Dear '+ userrrr.name + ', please select your specialist';
   specialistSelected = -1;
+
+  var dtToday = new Date();
+
+  var month = dtToday.getMonth() + 1;
+  var day = dtToday.getDate();
+  var year = dtToday.getFullYear();
+
+  if(month < 10)
+      month = '0' + month.toString();
+  if(day < 10)
+      day = '0' + day.toString();
+
+  var maxDate = year + '-' + month + '-' + day;    
+  $('#appDate').attr('min', maxDate);
 })
 
+// Method that check that there is a user sesion active
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
@@ -19,6 +37,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+// Method that generate and display the html card for each of the specialist
 async function specialistsCards() {
   let specialistList = await getInfoSpecialistDb();
   specialistList.forEach(specialist => {
@@ -73,32 +92,25 @@ async function specialistsCards() {
   }); 
 }
 
-specialistsCards()
-
-var getSpecialistSelected = function(){
-  const specialists = document.getElementsByClassName('specialists');
-  console.log(specialists);
-  // specialists.addEventListener("click", (e) => {
-  //   return specialists.id;
-  // });
-}
-
-let selectedSpecialist = getSpecialistSelected();
-
-
-
+// Method that handle the submit event of the appointment form
 $('#appointmentForm').submit(function(e) {
   e.preventDefault();
   var data = $(this).serializeArray();
   createAppointment(sessionStorage.getItem("uId"), data[0].value, specialistSelected.toString());
-  Swal.fire('Appointment Created!');
+  Swal.fire('Appointment Created!').then(function() {
+    location.href = '/menu';
+});;
+  
 });
 
+// Method that add a class to the selected card to display specail css style
 $('[data-cardSelectButton]').click(function() {
   $(this).parent('[data-cardSelect]').toggleClass('is-selected');
 });
 
-
+// Method that handle the submit event of the appointment form
+// params
+// idSpecial: String -> the key of the specialist to link it to the new appointmnet
 selSpe=function(idSpecial){
   var cards = document.getElementsByClassName("card");
   for(var i = 0; i < cards.length; i++)
@@ -109,3 +121,5 @@ selSpe=function(idSpecial){
  let col = document.getElementById("color"+idSpecial)
  col.classList.add("divSelected")
 }
+
+

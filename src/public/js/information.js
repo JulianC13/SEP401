@@ -1,5 +1,5 @@
 //To show Personal Information in Account tab
-obtenerInfoUserDb(sessionStorage.getItem("uId"))
+getInfoUserDb(sessionStorage.getItem("uId"))
 userr = JSON.parse(sessionStorage.getItem("userSession"));
 const myElement = document.getElementById("userDetails");
 myElement.innerHTML =  userr
@@ -72,6 +72,7 @@ $('#updateAccountForm').submit(function(e) {
 
 });
 
+// Method that update the user in the db
 function updateUserDB(name, phone, docid, address) {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -149,14 +150,6 @@ $('#updatePasswordForm').submit(function(e) {
             })
           });
     }
-});
-
-$('#cancelInfoUpdate').click(function() {
-    location.reload();
-});
-
-$('#cancelPassUpdate').click(function() {
-    location.reload();
 });
 
 // Method that check that there is a user sesion active

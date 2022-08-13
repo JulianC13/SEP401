@@ -7,6 +7,20 @@ $(document).ready(function(){
   userrrr = JSON.parse(sessionStorage.getItem("userSession"));
   const myElement = document.getElementById("helloText");
   myElement.innerHTML =  userrrr.name;
+
+  var dtToday = new Date();
+
+  var month = dtToday.getMonth() + 1;
+  var day = dtToday.getDate();
+  var year = dtToday.getFullYear();
+
+  if(month < 10)
+      month = '0' + month.toString();
+  if(day < 10)
+      day = '0' + day.toString();
+
+  var maxDate = year + '-' + month + '-' + day;    
+  $('#dateEdit').attr('min', maxDate);
 })
 
 // Method that loads in realtime the list of appointments asosicated to an user
@@ -103,7 +117,7 @@ dbrefAppointment.on("value", data => {
 // params
 // id: String -> id of the appointment that is going to be consulted
 async function getDetails(id){
-  let data = await obtenerInfoAppointmentDb(id)
+  let data = await getInfoAppointmentDb(id)
 
   let sectionDetails = document.getElementById('detailsSection')
   let sectionEdit = document.getElementById('editSection')
@@ -130,7 +144,7 @@ async function getDetails(id){
 // params
 // id: String -> id of the appointment that is going to be edited
 async function getEdit(id){
-  let data = await obtenerInfoAppointmentDb(id)
+  let data = await getInfoAppointmentDb(id)
 
   let sectionEdit = document.getElementById('editSection')
   let sectionDetails = document.getElementById('detailsSection')
@@ -156,7 +170,7 @@ async function getEdit(id){
     value.forEach((element) => {
       var opt = document.createElement("option");
       opt.value= element.id;
-      opt.innerHTML = element.name+ " - "+element.treatement;
+      opt.innerHTML = element.name+ " - "+element.treatment;
       selectDom.appendChild(opt);
     });
     selectDom.value = data.specialist
@@ -165,11 +179,11 @@ async function getEdit(id){
   
 }
 
-// Method that allows to get the details of determinated appointment and show allows the edition of the inputs in the html
+// Method that allows to get the details of the user asosiated to the appointment 
 // params
 // id: String -> id of the appointment that is going to be edited
 async function getUser(id){
-  let data = await obtenerUserDb(id)
+  let data = await getUserDb(id)
   let sectionEdit = document.getElementById('editSection')
   let sectionDetails = document.getElementById('detailsSection')
   let sectionUser = document.getElementById('userDetails')
