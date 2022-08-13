@@ -145,3 +145,17 @@ body{
    }
  }
  
+
+ .loading{
+   background-image: url("../img/load.gif");
+   background-repeat: no-repeat;
+  background-position: center;
+}
+.nav-pills .pill-1 .nav-link:not(.active) {
+   background-color: white;
+   color: #343A3F;
+}
+.nav-pills .pill-1 .nav-link {
+   background-color: #343A3F;
+   color: white;
+}

@@ -13,5 +13,5 @@ app.use(require('./routes/index'));
 
 if (!module.parent) {
   app.listen(port);
-  console.log('Express started on port 3000');
+  // console.log('Express started on port 3000');
 }

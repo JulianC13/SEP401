@@ -1,14 +1,14 @@
 
 async function asyncCall() {
   let specialistList = await getInfoSpecialistDb();
-  console.log(specialistList);
+  // console.log(specialistList);
   specialistList.forEach(specialist => {
     let startingPoint = document.getElementById("referencePoint");
     let newColumn = document.createElement("div");
     newColumn.classList.add("col-lg-4");
     newColumn.setAttribute("id", "new-column");
     startingPoint.append(newColumn);
-    console.log(newColumn);
+    // console.log(newColumn);
 
     let newCard = document.createElement("div");
     newCard.classList.add("card");
@@ -24,13 +24,13 @@ async function asyncCall() {
     cardBody.classList.add("card-body");
     
     newColumn.append(specialistAvatar, cardBody);
-    console.log(specialistAvatar)
+    // console.log(specialistAvatar)
 
     let cardTitle = document.createElement("h5");
     cardTitle.classList.add("card-title");
     cardTitle.innerHTML = "<strong>Dr." + specialist.name + "<strong>";
     cardBody.append(cardTitle);
-    console.log(cardTitle);
+    // console.log(cardTitle);
 
     let cardText = document.createElement("p");
     cardText.classList.add("card-text");
@@ -41,7 +41,7 @@ async function asyncCall() {
       let service = document.createElement("li");
       service.innerHTML = specialistService;
       cardText.appendChild(service);
-      console.log(service);
+      // console.log(service);
     });
 
     let selectSpecialistButton = document.createElement("a")

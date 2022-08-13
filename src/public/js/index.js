@@ -9,24 +9,24 @@ $('#loginForm').submit(function(e) {
   firebase.auth().signInWithEmailAndPassword(mailLog, passLog).then((userCredential) => {
     // Signed in
     obtenerInfoUserDb(userCredential.uid)
-    swal.fire({
-      icon: 'success',
-      title: 'PERFECT',
-      confirmButtonColor: '#00FF00',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        location.href = '/menu';
-      }
+      swal.fire({
+        icon: 'success',
+        title: 'PERFECT',
+        confirmButtonColor: '#00FF00',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.href = '/menu';
+        }
+      })
     })
-  })
-  .catch((error) => {
-    swal.fire({
-      icon: 'error',
-      title: 'ERROR',
-      text: error.message,
-      confirmButtonColor: '#FF0000',
-    })
-  });
+    .catch((error) => {
+      swal.fire({
+        icon: 'error',
+        title: 'ERROR',
+        text: error.message,
+        confirmButtonColor: '#FF0000',
+      })
+    });
 });
 
 // Method that handle the submit event of the sign up form
@@ -168,16 +168,17 @@ var resetPassword= function(){
    firebase.auth().sendPasswordResetEmail(result.value.email)
     .then(function() {  
     // Email sent.
-    console.log("Envio bien")
+     console.log("Success")
     })
     .catch(function(error) {
     // An error happened.
-     console.log("ERRRROR RECOVERY")
+     console.log("ERRROR RECOVERY")
      console.log("not correct format or user dont exist")
     });
   })
   
 }
+
 
 
 

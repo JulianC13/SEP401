@@ -29,11 +29,13 @@ let usuarioEnSesionId = null
 // params
 // id: String -> id of the user that is going to be consulted
 var obtenerInfoUserDb =  function(idUser){
-  dbref.child('Client/'+idUser).on('value', (snapshot) => {
-    const data = snapshot.val();
-    sessionStorage.setItem("userSession",JSON.stringify(data))
-    sessionStorage.setItem("uId",idUser)
-  });
+    dbref.child('Client/'+idUser).on('value', (snapshot) => {
+      const data = snapshot.val();
+      sessionStorage.setItem("userSession",JSON.stringify(data))
+      sessionStorage.setItem("uId",idUser)
+    });
+
+ 
 }
 
 // Method that goes to the database and get the info of the appointment
@@ -52,7 +54,6 @@ function obtenerInfoAppointmentDb (idAppoint){
 // params
 // id: String -> id of the appointment that is going to be deleted
 function deleteAppointmentDB(idAppoint){
-  console.log(idAppoint)
     dbref.child('Appointment/'+idAppoint).remove().then(function() {
       console.log("Remove succeeded.")
     })

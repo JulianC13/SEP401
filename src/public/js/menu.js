@@ -27,10 +27,12 @@ dbrefAppointment.on("value", data => {
     columns: [
       { data: 'date' },
       { data: 'id' }
-    ]
+    ],
+    initComplete: function () {
+      $("#tableContainer").removeClass("loading");
+    } 
   });
   $('#myTable tbody').on('click', '.detailsBut', function () {
-    console.log("HOLAAAA")
     var id = $(this).attr("Id").match(/\d+/)[0];
     getDetails(id)
   });
@@ -141,7 +143,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 $('#editForm').submit(function(e) {
   e.preventDefault();
   var data = $(this).serializeArray();
-  console.log(data)
+  // console.log(data)
   updateAppointmentDB(data[0].value,data[1].value,data[2].value)
   Swal.fire('Appointment Edited!')
 });
