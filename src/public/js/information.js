@@ -159,3 +159,13 @@ $('#cancelPassUpdate').click(function() {
     location.reload();
 });
 
+// Method that check that there is a user sesion active
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    // console.log("usuariooooo js loggeadoooo")
+  } else {
+    // No user is signed in.
+    logout();
+  }
+});
