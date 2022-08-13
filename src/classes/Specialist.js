@@ -6,7 +6,6 @@ class Specialist{
     this.phone = phone;
     this.availability =availability
   }
-  
   setName(x){
     this.name = x;
   }

@@ -6,11 +6,5 @@ class Appointment{
     this.userId = userId;
     this.specialistId = specialistId;
   }
-  setName(x){
-    this.name = x;
-  }
-  sayHello(){
-    console.log(this.name);
-  }
 }
 module.exports = Appointment 
