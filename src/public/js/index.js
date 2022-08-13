@@ -165,8 +165,6 @@ var resetPassword= function(){
       text: error.message,
       confirmButtonColor: '#FF0000',
     })
-     console.log("ERRROR RECOVERY")
-     console.log("not correct format or user dont exist")
     });
   })
   

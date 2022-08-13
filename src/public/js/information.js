@@ -123,32 +123,36 @@ $('#updatePasswordForm').submit(function(e) {
 
     function updatePassword(oldPass, newPasswordUpdate,userEmail) {
 
-        firebase.auth().signInWithEmailAndPassword(userEmail, oldPass).then((userCredential) => {
-            
+      firebase.auth().signInWithEmailAndPassword(userEmail, oldPass).then((userCredential) => {
         var user = firebase.auth().currentUser;
         var newPassword = newPasswordUpdate
-
         user.updatePassword(newPassword).then(function() {
-            swal.fire({
-                icon: 'success',
-                title: 'PERFECT',
-                confirmButtonColor: '#00FF00',
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  location.href = '/information';
-                }
-              })
-            }).catch(function(error) {
-            console.log("error updating DB but correct pass")
-            });
-          }).catch((error) => {
+          swal.fire({
+              icon: 'success',
+              title: 'PERFECT',
+              confirmButtonColor: '#00FF00',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.href = '/information';
+              }
+            })
+        }).catch(function(error) {
             swal.fire({
               icon: 'error',
               title: 'ERROR',
-              text: "The old password you have entered is incorrect.",
+              text: "error updating DB but correct password",
               confirmButtonColor: '#FF0000',
             })
-          });
+        });
+
+      }).catch((error) => {
+        swal.fire({
+          icon: 'error',
+          title: 'ERROR',
+          text: "The old password you have entered is incorrect.",
+          confirmButtonColor: '#FF0000',
+        })
+      });
     }
 });
 
