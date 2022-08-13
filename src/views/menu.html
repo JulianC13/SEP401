@@ -35,13 +35,14 @@
                 <tr>
                     <th>Date</th>
                     <th>Actions</th>
+                    <th hidden id="adminCol">Admin</th>
                 </tr>
             </thead>
            </table>
         </div>
         <di class="col-1"></di>
         <div class="col-4 centerDiv "style="text-align: center;">
-          <button class="form-control roundBtn"> + </button>
+          <a href="/appointment"><button class="form-control roundBtn"> + </button></a>
           <label class="text-center pt-4 display-5">Create New Appointment</label>
         </div>
       </div>
@@ -83,6 +84,32 @@
         <div class="col-4"></div>
         <div class="col-4"><input id="specialistDetails"  class="form-control" disabled/></div>
       </div>
+    </div>
+  </section>
+  <section id="userDetails"  class="pt-5" hidden >
+    <div class="container">
+      <hr>
+      <h1 class=" display-4">User details</h1>
+      <div class="row pt-4">
+        <div class="col-2"> 
+        </div>
+        <div class="col-2"> 
+          <h4 class=" display-5">Name: </h4>
+          <h4 class=" pt-1 display-5">Address: </h4>
+          <h4 class=" pt-1 display-5">Phone: </h4>
+          <h4 class=" pt-1 display-5">Mail: </h4>
+          <h4 class=" pt-1 display-5">Doc Id: </h4>
+        </div>
+        <div class="col-6"> 
+          <input class="form-control" type="text" id="nameDet" disabled />
+          <input class="form-control" type="text" id="addressDet" disabled />
+          <input  class="form-control" type="text" id="phoneDet"  disabled/>
+          <input class="form-control" type="text" id="emailDet" disabled />
+          <input class="form-control" type="text" id="docDet" disabled />
+        </div>
+      </div>
+
+      
     </div>
   </section>
   <!-- FOOTER -->

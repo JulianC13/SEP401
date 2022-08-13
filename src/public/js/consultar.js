@@ -25,7 +25,7 @@ var dbrefSpecialist= firebase.database().ref().child('Specialist');
 var appointments =[]
 let usuarioEnSesionId = null
 
-// Method that goes to the database and get the info of the user in session 
+// Method that goes to the database and get the info of the user in session login
 // params
 // id: String -> id of the user that is going to be consulted
 var obtenerInfoUserDb =  function(idUser){
@@ -34,8 +34,18 @@ var obtenerInfoUserDb =  function(idUser){
       sessionStorage.setItem("userSession",JSON.stringify(data))
       sessionStorage.setItem("uId",idUser)
     });
+}
 
- 
+// Method that goes to the database and get the info of the user in session 
+// params
+// id: String -> id of the user that is going to be consulted
+var obtenerUserDb =  function(idUser){
+  return new Promise(resolve => {
+    dbref.child('Client/'+idUser).on('value', (snapshot) => {
+      const data = snapshot.val();
+      resolve(data)
+    });
+  });
 }
 
 // Method that goes to the database and get the info of the appointment
@@ -72,15 +82,17 @@ var logout = function (){
   firebase.auth().signOut();
   sessionStorage.removeItem("appointments")
   sessionStorage.removeItem("userSession")
+  sessionStorage.removeItem("uId")
+  
   location.href = '/';
   
 }
 
 // Method that returns a list of all the specialist stored in the database
-var getInfoSpecialisDb = function(){
+var getInfoSpecialistDb = function(){
     specialists =[]
     return new Promise(resolve => {
-      dbref.child('Specialist').on("value", function(snapshot) {
+      dbref.child('Specialist/').on("value", function(snapshot) {
         snapshot.forEach(function(specialist) {
           var key = specialist.key;
           var valor = specialist.val();
@@ -103,12 +115,11 @@ var updateAppointmentDB = function (id, date, specialist){
       specialist: specialist,
     });
 }
-
-var getInfoSpecialistDb = function(){
-  return new Promise(resolve => {
-    dbref.child('Specialist/').on('value', (snapshot) => {
-      const data = snapshot.val();
-      resolve(data)
-    });
+var createAppointment = function (userId, appointmentDate, specialistName){
+  dbrefAppointment.push().set({
+    client: userId,
+    date: appointmentDate,
+    specialist: specialistName,
+    status: true
   });
 }

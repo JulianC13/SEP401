@@ -2,7 +2,7 @@
 // For View 
 const appointmentView = (req, res) => {
 
-    res.render("appointment", {title:'Appointment '+req.params.appointmentId, appoId: req.params.appointmentId} );
+    res.render("appointment", {title:'Appointment ', appoId: req.params.appointmentId} );
    
 }
 
