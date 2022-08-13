@@ -31,6 +31,7 @@ async function specialistsCards() {
 
     let newCard = document.createElement("div");
     newCard.classList.add("m-3");
+    newCard.setAttribute("id", "color"+specialist.id);
     newCard.classList.add("card");
     newColumn.append(newCard);
 
@@ -99,6 +100,12 @@ $('[data-cardSelectButton]').click(function() {
 
 
 selSpe=function(idSpecial){
+  var cards = document.getElementsByClassName("card");
+  for(var i = 0; i < cards.length; i++)
+  {
+    cards[i].classList.remove("divSelected")
+  }
  this.specialistSelected = idSpecial
-
+ let col = document.getElementById("color"+idSpecial)
+ col.classList.add("divSelected")
 }

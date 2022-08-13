@@ -159,3 +159,7 @@ body{
    background-color: #343A3F;
    color: white;
 }
+.divSelected{
+   border-color: darkblue!important;
+   border-width: thick!important;
+}
