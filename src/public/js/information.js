@@ -1,3 +1,14 @@
+// Method that check that there is a user sesion active
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    // console.log("usuariooooo js loggeadoooo")
+  } else {
+    // No user is signed in.
+    logout();
+  }
+});
+
 //To show Personal Information in Account tab
 getInfoUserDb(sessionStorage.getItem("uId"))
 userr = JSON.parse(sessionStorage.getItem("userSession"));
@@ -156,13 +167,3 @@ $('#updatePasswordForm').submit(function(e) {
     }
 });
 
-// Method that check that there is a user sesion active
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    // console.log("usuariooooo js loggeadoooo")
-  } else {
-    // No user is signed in.
-    logout();
-  }
-});

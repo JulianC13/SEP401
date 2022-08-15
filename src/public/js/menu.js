@@ -134,7 +134,7 @@ async function getDetails(id){
   getInfoSpecialistDb().then((value) => {
     value.forEach((element) => {
       if(element.id == data.specialist)
-        speDe.value =  element.name+ " - "+element.treatement
+        speDe.value =  element.name+ " - "+element.treatment
     });
   });
 
